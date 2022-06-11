@@ -1,0 +1,22 @@
+version: 0.2
+run-as: root
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - echo "Installing dependencies..."
+      - npm install -g serverless
+      - npm install
+      - npm install serverless-python-requirements
+  build:
+    commands:
+      - echo "Zipping deployment package..."
+      - serverless deploy
+  post_build:
+    commands:
+      - echo "Updating lambda Function..."
+      - echo "DONE!!"
+cache:
+  paths:
+    - node_modules
